@@ -10,14 +10,15 @@ templ Base() {
     <title>Test</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.js"
         integrity="sha384-ezjq8118wdwdRMj+nX4bevEi+cDLTbhLAeFF688VK8tPDGeLUe0WoY2MZtSla72F"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/css/output.css">
 </head>
 
-<body>
-    <div class="flex-1 h-screen flex flex-row bg-slate-950 text-gray-300 font-['Poppins']">
+<body class="bg-slate-950">
+    <div class="flex-1 h-screen flex flex-row  text-gray-300 font-['Poppins']">
         <div class="h-screen w-1/4 ">
 
             <div class="flex flex-col h-screen w-full p-3 justify-between ">
@@ -25,7 +26,7 @@ templ Base() {
                 <div>
                     <h1 class="text-3xl p-2 font-large">NEXUS</h1>
                     <div class="mt-10 text-sm text-gray-300 font-light">
-                        <div hx-get="/chat" hx-target="#result" hx-swap="innerHTML"
+                        <div hx-get="/newChat" hx-target="#result" hx-swap="innerHTML"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
                             <i class="fa-solid fa-square-plus fa-md"></i>
                             <h3>New Chat</h3>

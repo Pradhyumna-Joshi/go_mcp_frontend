@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Pradhyumna-Joshi/go_mcp_frontend/components"
 )
@@ -18,7 +19,7 @@ func main() {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		components.Base().Render(r.Context(), w)
 	})
-	mux.HandleFunc("/chat", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/newChat", func(w http.ResponseWriter, r *http.Request) {
 		components.ChatHome("Pradhyumna").Render(r.Context(), w)
 	})
 
@@ -32,6 +33,13 @@ func main() {
 
 	mux.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
 		components.About().Render(r.Context(), w)
+	})
+
+	mux.HandleFunc("/chatMessage", func(w http.ResponseWriter, r *http.Request) {
+		input := r.FormValue("input")
+
+		time.Sleep(2 * time.Second)
+		components.AIMsgBubble(input).Render(r.Context(), w)
 	})
 	log.Println("Server running on port 8000")
 	http.ListenAndServe(":8000", mux)

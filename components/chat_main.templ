@@ -1,21 +1,92 @@
 package components
 
+
+
 templ ChatHome(user string){
 
 
-<div class="flex flex-col h-screen w-full p-20 justify-center transition duration-500">
-    <div class="m-4">
+<div x-data="{showIntroText : true,isLoading:false, message:'',
+sendMessage(){
+
+            if (this.message.trim() === '' || this.isLoading) return
+            this.showIntroText=false
+            document.getElementById('message-container').insertAdjacentHTML('beforeend',
+            `
+            <div class=' flex flex-col items-end m-2'>
+                <div class='w-2/3  p-5 bg-slate-900 rounded-2xl'>
+                <p>${this.message}</p>
+                </div>
+            </div>
+
+            
+            `)
+
+          this.$nextTick(() => {
+            if (this.$refs.chat) {
+                this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+            }
+        }); 
+
+            this.$dispatch('send-message')
+            this.message=''
+}
+}" class="flex flex-col h-screen w-full p-20 justify-center transition duration-500">
+
+    <div x-show="showIntroText" class=" m-4">
         <h1 class=" text-xl font-light">Hi, {user}</h1>
         <h1 class=" text-3xl font-large">Where should we start?</h1>
     </div>
-    <div class="relative">
-        <textarea autofocus
-            class="w-full min-h-[80px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-sm font-sans outline-none resize-none"
-            name="input" id="input" placeholder="Ask Nexus"></textarea>
-        <div
-            class="absolute bottom-1 mr-2 mb-2 right-0 hover:bg-slate-800 w-[30px] h-[30px] rounded-full transition duration-300">
-            <h1 class="text-center text-md text-gray-300 font-light">+</h1>
+
+
+    <div x-show="!showIntroText" id="chat-window" x-ref="chat"
+        class="flex-1 overflow-y-auto flex flex-col  w-full mb-4 scroll-smooth font-sans" style="overflow-anchor:none"
+        @htmx:after-settle="$el.scrollTop = $el.scrollHeight">
+
+        <div id="message-container" class="w-full flex flex-col"></div>
+
+        <div class="h-16 flex items-center">
+            <div x-show="isLoading"
+                x-init="$watch('isLoading', value => { if(value) $nextTick(() => $refs.chat.scrollTop = $refs.chat.scrollHeight) })"
+                id="spinner" class="m-2 self-start">
+
+                <div class="  w-[20px] h-[20px] p-4 rounded-2xl  italic">
+                    Thinking...
+                </div>
+            </div>
         </div>
+
+
+    </div>
+
+
+    <div class="relative">
+
+        <div>
+            <input type="file" id="file-upload" class="hidden" />
+            <div @click="if (!isLoading) document.getElementById('file-upload').click()"
+                class="absolute flex justify-center items-center bottom-1 m-4 left-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+
+
+
+        <textarea x-model="message" hx-post="/chatMessage" hx-trigger="send-message from:window"
+            hx-target="#message-container" hx-swap="beforeend" @htmx:before-request="isLoading=true"
+            @htmx:after-request="isLoading=false" @keydown.enter="if (!$event.shiftKey){
+                $event.preventDefault()
+                sendMessage()
+        }" autofocus
+            class="w-full min-h-[120px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-sm font-sans outline-none resize-none"
+            name="input" id="input" placeholder="Ask Nexus"></textarea>
+
+
+        <div @click="sendMessage()"
+            class="absolute flex justify-center items-center bottom-1 m-4 right-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
+            <i x-show="!isLoading" class="fa-solid fa-angle-up"></i>
+            <i x-show="isLoading" class="fa-solid fa-stop fa-sm"></i>
+        </div>
+
     </div>
 </div>
 
