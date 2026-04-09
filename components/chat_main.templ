@@ -8,6 +8,7 @@ templ ChatHome(user string){
 <div x-data="{
 showIntroText : true,
 isLoading:false, 
+isDone:true,
 message:'',
 socket:null,
 currentBubble:null,
@@ -33,23 +34,31 @@ this.isLoading=false
 
 handleStream(data){
 
-this.isLoading = false
+this.isDone=false
 if(!this.currentBubble){
 
 const container = document.getElementById('message-container')
 const wrapper = document.createElement('div')
-wrapper.className='flex flex-col items-start m-2'
+wrapper.className='flex  items-start mt-4 gap-3'
+
+const logo = document.createElement('img')
+logo.src = '/static/bank.png'
+logo.alt='img'
+
+logo.className = 'mt-5 w-6 h-6  rounded-md  shrink-0'
 
 const newMessage = document.createElement('div')
-newMessage.className= 'w-2/3 p-5 bg-slate-900 text-gray-300  rounded-2xl  transition-all duration-800 ease-out animate-fade-int'
+newMessage.className= 'mt-4  text-gray-300    transition-all duration-800 ease-out animate-fade-int'
 
 this.currentBubble = document.createElement('p')
 newMessage.appendChild(this.currentBubble)
+wrapper.appendChild(logo)
 wrapper.appendChild(newMessage)
 container.appendChild(wrapper)
 }
 
 if (data === '[DONE]'){
+this.isDone=true
 this.isLoading = false
 this.currentBubble = null
 }else{
@@ -139,8 +148,8 @@ this.$nextTick(() => {
 
         <div @click="sendMessage()"
             class="absolute flex justify-center items-center bottom-1 m-4 right-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
-            <i x-show="!isLoading" class="fa-solid fa-angle-up"></i>
-            <i x-show="isLoading" class="fa-solid fa-stop fa-sm"></i>
+            <i x-show="isDone" class="fa-solid fa-angle-up"></i>
+            <i x-show="!isDone" class="fa-solid fa-stop fa-sm"></i>
         </div>
 
     </div>

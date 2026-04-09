@@ -2,17 +2,23 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/Pradhyumna-Joshi/go_mcp_frontend/components"
+	"github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
 	"github.com/gorilla/websocket"
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/llms/ollama"
 )
 
 var upgrader websocket.Upgrader
+
+var (
+	creds models.Creds
+)
 
 func main() {
 
@@ -28,6 +34,14 @@ func main() {
 		http.StripPrefix("/static/", http.FileServer(http.Dir("static"))).ServeHTTP(w, r)
 	})
 
+	mux.HandleFunc("POST /setcreds", func(w http.ResponseWriter, r *http.Request) {
+		creds.Model = r.FormValue("model")
+		creds.APIKey = r.FormValue("api_key")
+		creds.BaseURL = r.FormValue("base_url")
+
+		fmt.Println(creds)
+	})
+
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		components.Base().Render(r.Context(), w)
 	})
@@ -36,7 +50,11 @@ func main() {
 	})
 
 	mux.HandleFunc("/config", func(w http.ResponseWriter, r *http.Request) {
-		components.ConfigMain().Render(r.Context(), w)
+
+		if creds.Model != "" {
+			creds.HasSaved = true
+		}
+		components.ConfigMain(creds).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/settings", func(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +82,10 @@ func main() {
 		for {
 			_, msg, err := conn.ReadMessage()
 			if err != nil {
-				log.Println(err)
+				if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseNormalClosure) {
+					log.Println(err)
+				}
+				break
 			}
 
 			log.Println(string(msg))

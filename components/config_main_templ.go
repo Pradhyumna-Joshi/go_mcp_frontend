@@ -8,7 +8,10 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func ConfigMain() templ.Component {
+import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
+import "fmt"
+
+func ConfigMain(creds models.Creds) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +32,59 @@ func ConfigMain() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full p-20\"><div class=\"flex flex-row gap-2 items-center w-full rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><h3 class=\"text-2xl\">Configuration</h3></div><form class=\"w-full flex flex-col gap-4 items-start justify-center mt-8\"><div class=\"w-full flex flex-col gap-2\"><label>Model Name</label> <input class=\"bg-slate-900 p-2 w-1/2 rounded-md\" type=\"text\" title=\"model\" label=\"Model Name\"></div><div class=\"w-full flex flex-col gap-2\"><label>API Key</label> <input class=\"bg-slate-900 p-2 w-1/2 rounded-md\" type=\"text\" title=\"model\" label=\"Model Name\"></div><div class=\"w-full flex flex-col gap-2\"><label>Label</label> <input class=\"bg-slate-900 p-2 w-1/2 rounded-md\" type=\"text\" title=\"model\" label=\"Model Name\"></div><button class=\"mt-5 px-3 py-2 w-1/6 bg-blue-900 hover:opacity-80 transition-all duration-300 rounded-md\">Save</button></form></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("{isEditable : %t}", !creds.HasSaved))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_main.templ`, Line: 10, Col: 61}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" class=\"w-full h-auto p-20\"><div class=\"flex flex-row gap-2 items-center w-full rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><h3 class=\"text-2xl\">Configuration</h3></div><form hx-post=\"/setcreds\" @htmx:after-request=\"isEditable=false\" hx-swap=\"none\" class=\"w-full flex flex-col gap-4 items-start justify-center mt-8\"><div class=\"w-full flex flex-col gap-2\"><label>Model Name</label> <input :readonly=\"!isEditable\" :class=\"!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'\" autofocus class=\"bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none\" name=\"model\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(creds.Model)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_main.templ`, Line: 21, Col: 112}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"gpt-4o\"></div><div class=\"w-full flex flex-col gap-2\"><label>API Key/ Token</label> <input :readonly=\"!isEditable\" :class=\"!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'\" class=\"bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none\" name=\"api_key\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(creds.APIKey)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_main.templ`, Line: 28, Col: 115}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" type=\"password\" title=\"model\" required label=\"Model Name\"></div><div class=\"w-full flex flex-col gap-2\"><label>Base URL</label> <input :readonly=\"!isEditable\" :class=\"!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'\" class=\"bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none\" name=\"base_url\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(creds.BaseURL)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_main.templ`, Line: 35, Col: 117}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"https://api.openai.com/v1\"></div><button type=\"button\" x-show=\"!isEditable\" @click=\"isEditable = true\" class=\"w-1/4 mt-3 p-3 rounded-md bg-slate-700 hover:bg-slate-600 transition-colors duration-300\">Edit Settings</button> <button type=\"submit\" x-show=\"isEditable\" class=\"w-1/4 mt-3 p-3 rounded-md bg-blue-700 hover:bg-blue-600 transition-colors duration-300\">Save Configuration</button></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
