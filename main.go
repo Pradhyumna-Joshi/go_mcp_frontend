@@ -34,12 +34,17 @@ func main() {
 		http.StripPrefix("/static/", http.FileServer(http.Dir("static"))).ServeHTTP(w, r)
 	})
 
+	mux.HandleFunc("GET /getcreds", func(w http.ResponseWriter, r *http.Request) {
+		components.ConfigMain(creds).Render(r.Context(), w)
+	})
+
 	mux.HandleFunc("POST /setcreds", func(w http.ResponseWriter, r *http.Request) {
 		creds.Model = r.FormValue("model")
 		creds.APIKey = r.FormValue("api_key")
 		creds.BaseURL = r.FormValue("base_url")
 
 		fmt.Println(creds)
+		components.ConfigDisbaled(creds).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -52,9 +57,10 @@ func main() {
 	mux.HandleFunc("/config", func(w http.ResponseWriter, r *http.Request) {
 
 		if creds.Model != "" {
-			creds.HasSaved = true
+			components.ConfigDisbaled(creds).Render(r.Context(), w)
+		} else {
+			components.ConfigMain(creds).Render(r.Context(), w)
 		}
-		components.ConfigMain(creds).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/settings", func(w http.ResponseWriter, r *http.Request) {

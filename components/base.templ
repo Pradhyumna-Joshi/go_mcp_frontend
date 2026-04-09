@@ -7,7 +7,7 @@ templ Base() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Nexus</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -24,9 +24,12 @@ templ Base() {
             <div class="flex flex-col h-screen w-full p-3 justify-between ">
 
                 <div>
-                    <h1 class="text-3xl p-2 font-large">NEXUS</h1>
+                    <h1
+                        class="w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r  from-indigo-400 via-purple-400   to-pink-400  tracking-lighter text-transparent bg-clip-text ">
+                        NEXUS</h1>
                     <div class="mt-10 text-sm text-gray-300 font-light">
                         <div hx-get="/newChat" hx-target="#result" hx-swap="innerHTML"
+                            @click="Alpine.destroyTree(document.getElementById('result'))"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
                             <i class="fa-solid fa-square-plus fa-md"></i>
                             <h3>New Chat</h3>
@@ -65,7 +68,7 @@ templ Base() {
         </div>
         <div class="bg-slate-900 h-screen w-[2px]">
         </div>
-        <div id="result" class="w-3/4">
+        <div id="result" @htmx:after-swap="Alpine.initTree($el)" class="w-3/4">
             <div class="p-20 ">
                 <h1 class="text-3xl mb-2">Welcome to NEXUS</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id

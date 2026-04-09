@@ -1,47 +1,36 @@
 package components
 
 import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
-import "fmt"
-
-
 
 templ ConfigMain(creds models.Creds){
 
-<div x-data={fmt.Sprintf("{isEditable : %t}",!creds.HasSaved)} class="w-full h-auto p-20">
+<div class="w-full h-auto p-20">
     <div
         class="flex flex-row gap-2 items-center w-full  rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
         <h3 class="text-2xl">Configuration</h3>
     </div>
-    <form hx-post="/setcreds" @htmx:after-request="isEditable=false" hx-swap="none"
+    <form hx-post="/setcreds" hx-target="#result" hx-swap="innerHTML"
         class="w-full flex flex-col gap-4 items-start justify-center mt-8">
         <div class="w-full flex flex-col gap-2">
             <label>Model Name</label>
-            <input :readonly="!isEditable"
-                :class="!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'" autofocus
-                class="bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none" name="model" value={creds.Model}
-                type="text" title="model" label="Model Name" required placeholder="gpt-4o" />
+            <input autofocus class="border border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
+                name="model" value={creds.Model} type="text" title="model" label="Model Name" required
+                placeholder="gpt-4o" />
         </div>
         <div class="w-full flex flex-col gap-2">
             <label>API Key/ Token</label>
-            <input :readonly="!isEditable"
-                :class="!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'"
-                class="bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none" name="api_key" value={creds.APIKey}
-                type="password" title="model" required label="Model Name" />
+            <input class="border border-blue-500 bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none"
+                name="api_key" value={creds.APIKey} type="password" title="model" required label="Model Name" />
         </div>
         <div class="w-full flex flex-col gap-2">
             <label>Base URL</label>
-            <input :readonly="!isEditable"
-                :class="!isEditable?'opacity-50 cursor-not-allowed': 'border border-blue-500'"
-                class="bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none" name="base_url" value={creds.BaseURL}
-                type="text" title="model" label="Model Name" required placeholder="https://api.openai.com/v1" />
+            <input class="border border-blue-500 bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none"
+                name="base_url" value={creds.BaseURL} type="text" title="model" label="Model Name" required
+                placeholder="https://api.openai.com/v1" />
         </div>
 
-        <button type="button" x-show="!isEditable" @click="isEditable = true"
-            class="w-1/4 mt-3 p-3 rounded-md bg-slate-700 hover:bg-slate-600 transition-colors duration-300">
-            Edit Settings
-        </button>
 
-        <button type="submit" x-show="isEditable"
+        <button type="submit"
             class="w-1/4 mt-3 p-3 rounded-md bg-blue-700 hover:bg-blue-600 transition-colors duration-300">
             Save Configuration
         </button>
