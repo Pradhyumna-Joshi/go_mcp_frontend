@@ -5,7 +5,58 @@ package components
 templ ChatHome(user string){
 
 
-<div x-data="{showIntroText : true,isLoading:false, message:'',
+<div x-data="{
+showIntroText : true,
+isLoading:false, 
+message:'',
+socket:null,
+currentBubble:null,
+
+init(){
+this.isLoading=false
+ this.socket = new WebSocket('ws://localhost:8000/ws')
+ this.socket.onmessage = (event)=>{
+ if (!this.isLoading){
+ this.isLoading = true
+ this.showIntroText = false
+ }
+
+ this.handleStream(event.data)
+
+ this.$nextTick(()=>{
+    this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
+ })
+
+ }
+ this.socket.onclose = () => {console.log('ws closed')}
+},
+
+handleStream(data){
+
+this.isLoading = false
+if(!this.currentBubble){
+
+const container = document.getElementById('message-container')
+const wrapper = document.createElement('div')
+wrapper.className='flex flex-col items-start m-2'
+
+const newMessage = document.createElement('div')
+newMessage.className= 'w-2/3 p-5 bg-slate-900 text-gray-300  rounded-2xl  transition-all duration-800 ease-out animate-fade-int'
+
+this.currentBubble = document.createElement('p')
+newMessage.appendChild(this.currentBubble)
+wrapper.appendChild(newMessage)
+container.appendChild(wrapper)
+}
+
+if (data === '[DONE]'){
+this.isLoading = false
+this.currentBubble = null
+}else{
+this.currentBubble.textContent += data
+}
+},
+
 sendMessage(){
 
             if (this.message.trim() === '' || this.isLoading) return
@@ -13,7 +64,7 @@ sendMessage(){
             document.getElementById('message-container').insertAdjacentHTML('beforeend',
             `
             <div class=' flex flex-col items-end m-2'>
-                <div class='w-2/3  p-5 bg-slate-900 rounded-2xl'>
+                <div class='w-2/3  p-5 bg-slate-900 text-gray-300 rounded-2xl transition-all duration-300 ease-out animate-fade-int'>
                 <p>${this.message}</p>
                 </div>
             </div>
@@ -21,16 +72,21 @@ sendMessage(){
             
             `)
 
-          this.$nextTick(() => {
+          
+            this.socket.send(this.message)
+            this.message=''
+this.$nextTick(() => {
             if (this.$refs.chat) {
                 this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
             }
         }); 
-
-            this.$dispatch('send-message')
-            this.message=''
 }
-}" class="flex flex-col h-screen w-full p-20 justify-center transition duration-500">
+}" x-init="
+        showIntroText = true; 
+        isLoading = false; 
+        message = ''; 
+        currentBubble = null;
+     " class="flex flex-col h-screen w-full p-20 justify-center transition duration-500">
 
     <div x-show="showIntroText" class=" m-4">
         <h1 class=" text-xl font-light">Hi, {user}</h1>
@@ -77,7 +133,7 @@ sendMessage(){
                 $event.preventDefault()
                 sendMessage()
         }" autofocus
-            class="w-full min-h-[120px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-sm font-sans outline-none resize-none"
+            class="w-full min-h-[120px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-base font-sans outline-none resize-none"
             name="input" id="input" placeholder="Ask Nexus"></textarea>
 
 
