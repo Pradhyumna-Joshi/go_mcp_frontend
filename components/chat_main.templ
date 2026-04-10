@@ -2,126 +2,135 @@ package components
 
 
 
-templ ChatHome(user string){
+templ ChatHome(user string,greeting string,showIntro bool){
 
+<script>
+    function chatComponent() {
+        return {
+            showIntroText: false,
+            isLoading: false,
+            isDone: true,
+            showChatWindow: false,
+            message: '',
+            socket: null,
+            currentBubble: null,
 
-<div x-data="{
-showIntroText : false,
-isLoading:false, 
-hasStarted:false,
-isDone:true,
-message:'',
-socket:null,
-currentBubble:null,
+            init() {
+                if (this.socket) {
+                    this.socket.close();
+                    this.socket = null;
+                }
 
-init(){
-if(this.socket){ this.socket.close(); this.socket = null; }
- 
- this.showIntroText = true;
- this.isLoading = false;
- this.hasStarted=false;
- this.isDone = true;
- this.message = '';
- this.currentBubble = null;
- 
- const container = document.getElementById('message-container');
- if(container) container.innerHTML = '';
+                this.showIntroText = true;
+                this.showChatWindow = false;
+                this.isLoading = false;
+                this.isDone = true;
+                this.message = '';
+                this.currentBubble = null;
 
- this.socket = new WebSocket('ws://localhost:8000/ws')
- this.socket.onmessage = (event)=>{
- if (!this.isLoading){
- this.isLoading = true
- this.showIntroText = false
- }
+                const container = document.getElementById('message-container');
+                if (container) container.innerHTML = '';
 
- this.handleStream(event.data)
+                this.socket = new WebSocket('ws://localhost:8000/ws');
 
- this.$nextTick(()=>{
-    this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
- })
+                this.socket.onmessage = (event) => {
+                    if (!this.isLoading) {
+                        this.isLoading = true;
+                        this.showIntroText = false;
+                    }
 
- }
- this.socket.onclose = () => {console.log('ws closed')}
-},
+                    this.handleStream(event.data);
 
-handleStream(data){
+                    this.$nextTick(() => {
+                        if (this.$refs.chat) {
+                            this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+                        }
+                    });
+                };
 
-this.isDone=false
-this.isLoading=false
-if(!this.currentBubble){
+                this.socket.onclose = () => console.log('ws closed');
+            },
 
-const container = document.getElementById('message-container')
-const wrapper = document.createElement('div')
-wrapper.className='flex  items-start mt-4 gap-3'
+            handleStream(data) {
+                this.isDone = false;
+                this.isLoading = false;
 
-const logo = document.createElement('img')
-logo.src = '/static/bank.png'
-logo.alt='img'
+                if (!this.currentBubble) {
+                    const container = document.getElementById('message-container');
 
-logo.className = 'mt-5 w-6 h-6  rounded-md  shrink-0'
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'flex items-start mt-4 gap-3';
 
-const newMessage = document.createElement('div')
-newMessage.className= 'mt-4  text-gray-300    transition-all duration-800 ease-out animate-fade-int'
+                    const logo = document.createElement('img');
+                    logo.src = '/static/bank.png';
+                    logo.className = 'mt-5 w-6 h-6 rounded-md shrink-0';
 
-this.currentBubble = document.createElement('p')
-newMessage.appendChild(this.currentBubble)
-wrapper.appendChild(logo)
-wrapper.appendChild(newMessage)
-container.appendChild(wrapper)
-}
+                    const newMessage = document.createElement('div');
+                    newMessage.className = 'mt-4 text-gray-300';
 
-if (data === '[DONE]'){
-this.isDone=true
-this.isLoading = false
-this.currentBubble = null
-}else{
-this.currentBubble.textContent += data
-}
-},
+                    this.currentBubble = document.createElement('p');
 
-sendMessage(){
+                    newMessage.appendChild(this.currentBubble);
+                    wrapper.appendChild(logo);
+                    wrapper.appendChild(newMessage);
+                    container.appendChild(wrapper);
+                }
 
-            if (this.message.trim() === '' || this.isLoading) return
-            this.showIntroText=false
-            this.hasStarted=true
-            document.getElementById('message-container').insertAdjacentHTML('beforeend',
-            `
-            <div class=' flex flex-col items-end m-2'>
-                <div class='w-2/3  p-5 bg-slate-900 text-gray-300 rounded-2xl transition-all duration-300 ease-out animate-fade-int'>
-                <p>${this.message}</p>
+                if (data === '[DONE]') {
+                    this.isDone = true;
+                    this.currentBubble = null;
+                } else {
+                    this.currentBubble.textContent += data;
+                }
+            },
+
+            sendMessage() {
+                if (this.message.trim() === '' || this.isLoading) return;
+
+                this.showIntroText = false;
+                this.showChatWindow = true;
+
+                document.getElementById('message-container').insertAdjacentHTML(
+                    'beforeend',
+                    `
+                <div class='flex flex-col items-end m-2'>
+                    <div class='w-2/3 p-5 bg-slate-900 text-gray-300 rounded-2xl'>
+                        <p>${this.message}</p>
+                    </div>
                 </div>
-            </div>
+                `
+                );
 
-            
-            `)
+                this.isLoading = true;
+                this.socket.send(this.message);
+                this.message = '';
 
-            this.isLoading = true
-            this.socket.send(this.message)
-            this.message=''
-this.$nextTick(() => {
-            if (this.$refs.chat) {
-                this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+                this.$nextTick(() => {
+                    this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+                });
             }
-        }); 
-}
-}" x-init="$nextTick(() => init())" class="flex flex-col h-screen w-full p-20 justify-center transition duration-500">
+        };
+    }
+</script>
+<div x-data="chatComponent()" x-init="init()" hx-on:htmx:after-swap="Alpine.initTree($el)" class=" flex flex-col h-screen w-full p-20 justify-center
+    transition duration-500">
 
     <div x-show="showIntroText" class=" m-4">
         <h1 class="w-fit text-2xl font-light">Hi, {user}</h1>
         <h1
-            class="w-fit text-4xl   bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-            Where should we
-            start?</h1>
+            class="w-fit h-[50px] text-4xl    bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+            {greeting}
+        </h1>
     </div>
 
 
-    <div x-show="!showIntroText" id="chat-window" x-ref="chat"
-        class="flex-1 overflow-y-auto flex flex-col  w-full mb-4 scroll-smooth font-sans" style="overflow-anchor:none"
+    <div x-if="showChatWindow" id="chat-window" x-ref="chat" :class="showChatWindow?'flex-1':h-0 overflow-hidden"
+        class=" overflow-y-auto flex flex-col  w-full mb-4 scroll-smooth font-sans" style="overflow-anchor:none"
         @htmx:after-settle="$el.scrollTop = $el.scrollHeight">
 
         <div id="message-container" class="w-full flex flex-col"></div>
 
-        <div x-show="isLoading && hasStarted" class="h-16 flex items-center">
+        <div x-show="isLoading" class="h-16 flex items-center">
             <div id="spinner" class="m-2 self-start">
                 <!--
                 <h1

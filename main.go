@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -22,6 +23,15 @@ var (
 )
 
 func main() {
+
+	titles := []string{
+		"What's on your mind?",
+		"Where should we begin?",
+		"System ready. What’s next?",
+		"What's the goal?",
+		"How can Nexus help today?",
+		"What's on your agenda?",
+	}
 
 	llm, err := ollama.New(ollama.WithModel("mistral"))
 	if err != nil {
@@ -62,7 +72,8 @@ func main() {
 		components.Base().Render(r.Context(), w)
 	})
 	mux.HandleFunc("/newChat", func(w http.ResponseWriter, r *http.Request) {
-		components.ChatHome("Pradhyumna").Render(r.Context(), w)
+		components.ChatHome("Pradhyumna", titles[rand.Intn(len(titles))], true).Render(r.Context(), w)
+
 	})
 
 	mux.HandleFunc("/config", func(w http.ResponseWriter, r *http.Request) {

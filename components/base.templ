@@ -29,7 +29,6 @@ templ Base() {
                         NEXUS</h1>
                     <div class="mt-10 text-sm text-gray-300 font-light">
                         <div hx-get="/newChat" hx-target="#result" hx-swap="innerHTML"
-                            @click="Alpine.destroyTree(document.getElementById('result'))"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
                             <i class="fa-solid fa-square-plus fa-md"></i>
                             <h3 class="select-none">New Chat</h3>
@@ -67,7 +66,7 @@ templ Base() {
         </div>
         <div class="bg-slate-900 h-screen w-[2px]">
         </div>
-        <div id="result" @htmx:after-swap="Alpine.initTree($el)" class="w-3/4">
+        <div id="result" class="w-3/4">
             <div class="p-20 ">
                 <h1 class="text-3xl mb-2">Welcome to NEXUS</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id
