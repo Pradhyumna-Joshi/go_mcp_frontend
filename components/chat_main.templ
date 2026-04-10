@@ -6,7 +6,7 @@ templ ChatHome(user string){
 
 
 <div x-data="{
-showIntroText : true,
+showIntroText : false,
 isLoading:false, 
 hasStarted:false,
 isDone:true,
@@ -121,13 +121,15 @@ this.$nextTick(() => {
 
         <div id="message-container" class="w-full flex flex-col"></div>
 
-        <div class="h-16 flex items-center">
-            <div x-show="isLoading && hasStarted" id="spinner" class="m-2 self-start">
-
+        <div x-show="isLoading && hasStarted" class="h-16 flex items-center">
+            <div id="spinner" class="m-2 self-start">
+                <!--
                 <h1
                     class="w-fit text-lg bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 italic text-transparent bg-clip-text">
                     Thinking...
                 </h1>
+                -->
+                <img src="/static/bank.gif" alt="Thinking" class="mt-5  w-6 h-6  rounded-sm shrink-0" />
             </div>
         </div>
 
