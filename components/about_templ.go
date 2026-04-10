@@ -29,7 +29,7 @@ func About() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full p-20\"><div class=\"flex flex-row gap-2 items-center w-full rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><h3 class=\"text-2xl\">About</h3></div><h1 class=\"text-3xl mb-2\">Welcome to NEXUS</h1><p>Made with ♥️ in GO and HTMX</p></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full p-20\"><div class=\"flex flex-row gap-2 pb-2 items-center w-full rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><h3 class=\"text-3xl select-none\">About</h3></div><h1 class=\"text-3xl mb-2\">Welcome to NEXUS</h1><p>Made with ♥️ in GoTH (GO, TEMPL & HTMX)</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

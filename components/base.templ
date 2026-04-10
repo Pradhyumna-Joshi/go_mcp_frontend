@@ -25,27 +25,26 @@ templ Base() {
 
                 <div>
                     <h1
-                        class="w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r  from-indigo-400 via-purple-400   to-pink-400  tracking-lighter text-transparent bg-clip-text ">
+                        class="w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r  from-indigo-400 via-purple-400   to-pink-400  tracking-lighter text-transparent bg-clip-text select-none ">
                         NEXUS</h1>
                     <div class="mt-10 text-sm text-gray-300 font-light">
                         <div hx-get="/newChat" hx-target="#result" hx-swap="innerHTML"
                             @click="Alpine.destroyTree(document.getElementById('result'))"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
                             <i class="fa-solid fa-square-plus fa-md"></i>
-                            <h3>New Chat</h3>
+                            <h3 class="select-none">New Chat</h3>
                         </div>
                         <div hx-get="/config" hx-target="#result" hx-swap="innerHTML"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
-                            <i class="fa-solid fa-sliders fa-md"></i>
-
-                            <h3>Configuration</h3>
+                            <i class="fa-brands fa-buffer"></i>
+                            <h3 class="select-none">Models</h3>
                         </div>
-                        <div hx-get="/settings" hx-target="#result" hx-swap="innerHTML"
+                        <div hx-get="/tools" hx-target="#result" hx-swap="innerHTML"
                             class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
-
-                            <i class="fa-solid fa-gear fa-md"></i>
-                            <h3>Settings</h3>
+                            <i class="fa-solid fa-screwdriver-wrench fa-sm"></i>
+                            <h3 class="select-none">Tools</h3>
                         </div>
+
                     </div>
                 </div>
 
@@ -54,12 +53,12 @@ templ Base() {
                     <div hx-get="/about" hx-target="#result" hx-swap="innerHTML"
                         class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
                         <i class="fa-solid fa-circle-info fa-sm"></i>
-                        <h2>About</h2>
+                        <h2 class="select-none">About</h2>
                     </div>
                     <div
                         class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
                         <i class="fa-solid fa-arrow-right-from-bracket fa-md"></i>
-                        <h2>Log Out</h2>
+                        <h2 class="select-none">Log Out</h2>
                     </div>
 
                 </div>

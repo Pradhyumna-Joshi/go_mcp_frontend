@@ -2,16 +2,17 @@ package components
 
 import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
 
-templ ConfigDisabled(conf []models.ModelConfig){
+templ ToolsDisabled(conf []models.MCPServerConfig){
 
 <div class="w-full h-screen flex flex-col overflow-hidden p-20">
     <div
         class="flex flex-row gap-2 pb-2  items-center w-full  rounded-md shadow-md   transition duration-300 cursor-pointer">
-        <h3 class="text-3xl select-none">Configuration</h3>
+        <h3 class="text-3xl select-none">Tools <span class="text-xl italic select-none">(MCP Servers)</span>
+        </h3>
     </div>
     <div class="flex-1  overflow-y-auto scroll-smooth">
         <div class="mt-8">
-            <h1 class="text-xl font-bold">Planner LLM</h1>
+            <h1 class="text-xl font-bold select-none">MCP Server</h1>
             <p class="mt-2 text-sm italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
                 condimentum
                 sapien
@@ -20,42 +21,31 @@ templ ConfigDisabled(conf []models.ModelConfig){
                 pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante
                 iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada
                 fames ac ante ipsum primis in faucibus</p>
-            <form hx-get="/getmodelconf" hx-target="#result" hx-swap="innerHTML"
+
+            <form hx-get="/gettoolconf" hx-target="#result" hx-swap="innerHTML"
                 class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
                 <div class="w-full flex flex-col gap-2">
                     <label>Name</label>
                     <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
+                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
                         name="name1" value={conf[0].Name} type="text" title="model" label="Model Name" required
-                        placeholder="groq-gpt-oss-120b" readonly />
+                        placeholder="your-mcp-server" readonly />
                 </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>Provider</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="provider1" value={conf[0].Provider} type="text" title="model" label="Model Name" required
-                        placeholder="openai" readonly />
-                </div>
+
                 <div class="w-full flex flex-col gap-2">
                     <label>Base URL</label>
                     <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
+                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
                         name="base_url1" value={conf[0].BaseURL} type="text" title="model" label="Model Name" required
                         placeholder="https://api.groq.com/openai/v1" readonly />
                 </div>
+
                 <div class="w-full flex flex-col gap-2">
-                    <label>API Key/ Token</label>
+                    <label>Transport</label>
                     <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                        name="api_key1" value={conf[0].APIKey} type="password" title="model" required label="Model Name"
-                        readonly />
-                </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>Model</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="model1" value={conf[0].Model} type="text" title="model" label="Model Name" required
-                        placeholder="openai/gpt-oss-120b" readonly />
+                        class="border cursor-not-allowed border-white/10  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
+                        name="transport1" value={conf[0].Transport} type="text" title="model" label="Model Name"
+                        required placeholder="sse" readonly />
                 </div>
 
 
@@ -64,7 +54,7 @@ templ ConfigDisabled(conf []models.ModelConfig){
 
 
                 <div class="mt-8">
-                    <h1 class="text-xl font-bold">Executor LLM</h1>
+                    <h1 class="text-xl font-bold select-none">Additional MCP Server</h1>
                     <p class="mt-2 text-sm italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
                         condimentum
                         sapien
@@ -74,58 +64,46 @@ templ ConfigDisabled(conf []models.ModelConfig){
                         iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et
                         malesuada
                         fames ac ante ipsum primis in faucibus</p>
+
                     <div class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
                         <div class="w-full flex flex-col gap-2">
                             <label>Name</label>
                             <input
                                 class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
                                 name="name2" value={conf[1].Name} type="text" title="model" label="Model Name" required
-                                placeholder="groq-gpt-oss-120b" readonly />
+                                placeholder="your-mcp-server" readonly />
                         </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Provider</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="provider2" value={conf[1].Model} type="text" title="model" label="Model Name"
-                                required placeholder="openai" readonly />
-                        </div>
+
                         <div class="w-full flex flex-col gap-2">
                             <label>Base URL</label>
                             <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
+                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
                                 name="base_url2" value={conf[1].BaseURL} type="text" title="model" label="Model Name"
                                 required placeholder="https://api.groq.com/openai/v1" readonly />
                         </div>
+
                         <div class="w-full flex flex-col gap-2">
-                            <label>API Key/ Token</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                                name="api_key2" value={conf[1].APIKey} type="password" title="model" required
-                                label="Model Name" readonly />
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Model</label>
+                            <label>Transport</label>
                             <input
                                 class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="model2" value={conf[1].Model} type="text" title="model" label="Model Name"
-                                required placeholder="openai/gpt-oss-120b" readonly />
+                                name="transport2" value={conf[1].Transport} type="text" title="model" label="Model Name"
+                                required placeholder="sse" readonly />
                         </div>
+
 
 
                         <button type="submit"
-                            class="w-1/4 mt-3 p-3 rounded-md bg-red-500 hover:bg-red-500/80 transition-colors duration-300 transition-all duration-300">
+                            class="w-1/4 mt-3 p-3 rounded-md bg-red-500 hover:bg-red-500/80 transition-colors duration-300">
                             Edit Settings
                         </button>
-
-
-
                     </div>
+
                 </div>
             </form>
         </div>
 
-
     </div>
-</div>
 
+
+</div>
 }

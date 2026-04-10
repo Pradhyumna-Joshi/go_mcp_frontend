@@ -1,0 +1,110 @@
+package components
+
+import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
+
+templ Tools(conf []models.MCPServerConfig){
+
+<div class="w-full h-screen flex flex-col overflow-hidden p-20">
+    <div
+        class="flex flex-row gap-2 pb-2  items-center w-full  rounded-md shadow-md   transition duration-300 cursor-pointer">
+        <h3 class="text-3xl select-none">Tools <span class="text-xl italic select-none">(MCP Servers)</span>
+        </h3>
+    </div>
+    <div class="flex-1  overflow-y-auto scroll-smooth">
+        <div class="mt-8">
+            <h1 class="text-xl font-bold select-none">MCP Server</h1>
+            <p class="mt-2 text-sm italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                condimentum
+                sapien
+                id
+                scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et
+                pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante
+                iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada
+                fames ac ante ipsum primis in faucibus</p>
+
+            <form hx-post="/settoolconf" hx-target="#result" hx-swap="innerHTML"
+                class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
+                <div class="w-full flex flex-col gap-2">
+                    <label>Name</label>
+                    <input autofocus
+                        class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
+                        name="name1" value={conf[0].Name} type="text" title="model" label="Model Name" required
+                        placeholder="your-mcp-server" />
+                </div>
+
+                <div class="w-full flex flex-col gap-2">
+                    <label>Base URL</label>
+                    <input
+                        class="border border-white/10 focus:border-blue-500 bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
+                        name="base_url1" value={conf[0].BaseURL} type="text" title="model" label="Model Name" required
+                        placeholder="https://api.groq.com/openai/v1" />
+                </div>
+
+                <div class="w-full flex flex-col gap-2">
+                    <label>Transport</label>
+                    <input autofocus
+                        class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
+                        name="transport1" value={conf[0].Transport} type="text" title="model" label="Model Name"
+                        required placeholder="sse" />
+                </div>
+
+
+
+
+
+
+                <div class="mt-8">
+                    <h1 class="text-xl font-bold select-none">Additional MCP Server</h1>
+                    <p class="mt-2 text-sm italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                        condimentum
+                        sapien
+                        id
+                        scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et
+                        pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante
+                        iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et
+                        malesuada
+                        fames ac ante ipsum primis in faucibus</p>
+
+                    <div class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
+                        <div class="w-full flex flex-col gap-2">
+                            <label>Name</label>
+                            <input autofocus
+                                class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
+                                name="name2" value={conf[1].Name} type="text" title="model" label="Model Name" required
+                                placeholder="your-mcp-server" />
+                        </div>
+
+                        <div class="w-full flex flex-col gap-2">
+                            <label>Base URL</label>
+                            <input
+                                class="border border-white/10 focus:border-blue-500 bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
+                                name="base_url2" value={conf[1].BaseURL} type="text" title="model" label="Model Name"
+                                required placeholder="https://api.groq.com/openai/v1" />
+                        </div>
+
+                        <div class="w-full flex flex-col gap-2">
+                            <label>Transport</label>
+                            <input autofocus
+                                class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
+                                name="transport2" value={conf[1].Transport} type="text" title="model" label="Model Name"
+                                required placeholder="sse" />
+                        </div>
+
+
+                        <button type="submit"
+                            class="w-1/4 mt-3 p-3 rounded-md bg-blue-700 hover:bg-blue-600 transition-colors duration-300">
+                            Save Configuration
+                        </button>
+
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+}

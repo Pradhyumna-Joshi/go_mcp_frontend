@@ -17,7 +17,8 @@ import (
 var upgrader websocket.Upgrader
 
 var (
-	creds models.Creds
+	serverConf = make([]models.MCPServerConfig, 2)
+	modelConf  = make([]models.ModelConfig, 2)
 )
 
 func main() {
@@ -34,17 +35,27 @@ func main() {
 		http.StripPrefix("/static/", http.FileServer(http.Dir("static"))).ServeHTTP(w, r)
 	})
 
-	mux.HandleFunc("GET /getcreds", func(w http.ResponseWriter, r *http.Request) {
-		components.ConfigMain(creds).Render(r.Context(), w)
+	mux.HandleFunc("GET /getmodelconf", func(w http.ResponseWriter, r *http.Request) {
+		components.ConfigMain(modelConf).Render(r.Context(), w)
 	})
 
-	mux.HandleFunc("POST /setcreds", func(w http.ResponseWriter, r *http.Request) {
-		creds.Model = r.FormValue("model")
-		creds.APIKey = r.FormValue("api_key")
-		creds.BaseURL = r.FormValue("base_url")
+	mux.HandleFunc("POST /setmodelconf", func(w http.ResponseWriter, r *http.Request) {
+		modelConf[0].Model = r.FormValue("model1")
+		modelConf[0].APIKey = r.FormValue("api_key1")
+		modelConf[0].BaseURL = r.FormValue("base_url1")
+		modelConf[0].Name = r.FormValue("name1")
+		modelConf[0].Provider = r.FormValue("provider1")
 
-		fmt.Println(creds)
-		components.ConfigDisbaled(creds).Render(r.Context(), w)
+		modelConf[1].Model = r.FormValue("model2")
+		modelConf[1].APIKey = r.FormValue("api_key2")
+		modelConf[1].BaseURL = r.FormValue("base_url2")
+		modelConf[1].Name = r.FormValue("name2")
+		modelConf[1].Provider = r.FormValue("provider2")
+
+		modelConf[0].HasSaved = true
+		modelConf[1].HasSaved = true
+		fmt.Println(modelConf)
+		components.ConfigDisabled(modelConf).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -56,11 +67,38 @@ func main() {
 
 	mux.HandleFunc("/config", func(w http.ResponseWriter, r *http.Request) {
 
-		if creds.Model != "" {
-			components.ConfigDisbaled(creds).Render(r.Context(), w)
+		if !modelConf[0].HasSaved {
+			components.ConfigMain(modelConf).Render(r.Context(), w)
 		} else {
-			components.ConfigMain(creds).Render(r.Context(), w)
+			components.ConfigDisabled(modelConf).Render(r.Context(), w)
 		}
+	})
+
+	mux.HandleFunc("/tools", func(w http.ResponseWriter, r *http.Request) {
+		if !serverConf[0].HasSaved {
+			components.Tools(serverConf).Render(r.Context(), w)
+		} else {
+			components.ToolsDisabled(serverConf).Render(r.Context(), w)
+		}
+	})
+
+	mux.HandleFunc("POST /settoolconf", func(w http.ResponseWriter, r *http.Request) {
+		serverConf[0].Name = r.FormValue("name1")
+		serverConf[0].BaseURL = r.FormValue("base_url1")
+		serverConf[0].Transport = r.FormValue("transport1")
+
+		serverConf[1].Name = r.FormValue("name2")
+		serverConf[1].BaseURL = r.FormValue("base_url2")
+		serverConf[1].Transport = r.FormValue("transport2")
+
+		serverConf[0].HasSaved = true
+		serverConf[1].HasSaved = true
+		fmt.Println(serverConf)
+		components.ToolsDisabled(serverConf).Render(r.Context(), w)
+	})
+
+	mux.HandleFunc("GET /gettoolconf", func(w http.ResponseWriter, r *http.Request) {
+		components.Tools(serverConf).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/settings", func(w http.ResponseWriter, r *http.Request) {

@@ -29,7 +29,7 @@ func Settings() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full p-20\"><div class=\"flex flex-row gap-2 items-center w-full rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><h3 class=\"text-2xl\">Settings</h3></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full p-20\"><div class=\"flex flex-row gap-2 items-center w-full rounded-md shadow-md transition duration-300 cursor-pointer\"><h3 class=\"text-2xl\">Settings</h3></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
