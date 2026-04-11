@@ -1,5 +1,8 @@
 package components
 
+import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
+
+
 templ Base() {
 <!DOCTYPE html>
 <html lang="en">
@@ -35,45 +38,59 @@ templ Base() {
                         class="w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r  from-indigo-400 via-purple-400   to-pink-400  tracking-lighter text-transparent bg-clip-text select-none ">
                         NEXUS</h1>
                     <div class="mt-10 text-sm text-gray-300 font-light">
-                        <div hx-get="/newChat" hx-target="#result" hx-swap="innerHTML"
-                            class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
-                            <i class="fa-solid fa-square-plus fa-md"></i>
-                            <h3 class="select-none">New Chat</h3>
-                        </div>
-                        <div hx-get="/config" hx-target="#result" hx-swap="innerHTML"
-                            class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
-                            <i class="fa-brands fa-buffer"></i>
-                            <h3 class="select-none">Models</h3>
-                        </div>
-                        <div hx-get="/tools" hx-target="#result" hx-swap="innerHTML"
-                            class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
-                            <i class="fa-solid fa-screwdriver-wrench fa-sm"></i>
-                            <h3 class="select-none">Tools</h3>
-                        </div>
 
+
+                        @NavItem(models.NavItem{
+                        Title: "New Chat",
+                        GetURL: "/newChat",
+                        Target: "#result",
+                        Swap: "innerHTML",
+                        IconClass: "fa-solid fa-square-plus fa-lg",
+                        })
+
+                        @NavItem(models.NavItem{
+                        Title: "Models",
+                        GetURL: "/config",
+                        Target: "#result",
+                        Swap: "innerHTML",
+                        IconClass: "fa-brands fa-buffer fa-lg",
+                        })
+
+                        @NavItem(models.NavItem{
+                        Title: "Tools",
+                        GetURL: "/tools",
+                        Target: "#result",
+                        Swap: "innerHTML",
+                        IconClass: "fa-solid fa-screwdriver-wrench fa-lg",
+                        })
                     </div>
                 </div>
 
 
                 <div class="text-gray-300 text-sm">
-                    <div hx-get="/about" hx-target="#result" hx-swap="innerHTML"
-                        class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
-                        <i class="fa-solid fa-circle-info fa-sm"></i>
-                        <h2 class="select-none">About</h2>
-                    </div>
+
+                    @NavItem(models.NavItem{
+                    Title: "About",
+                    GetURL: "/about",
+                    Target: "#result",
+                    Swap: "innerHTML",
+                    IconClass: "fa-solid fa-circle-info fa-lg",
+                    })
+
+                    <!--
                     <div
                         class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer">
                         <i class="fa-solid fa-arrow-right-from-bracket fa-md"></i>
                         <h2 class="select-none">Log Out</h2>
                     </div>
-
+-->
                 </div>
 
             </div>
         </div>
         <div class="bg-slate-900 h-screen w-[2px]">
         </div>
-        <div id="result" class="w-3/4">
+        <div id="result" class="w-3/4 ">
             <div class="p-20 ">
                 <h1 class="text-3xl mb-2">Welcome to NEXUS</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id

@@ -1,0 +1,10 @@
+package components
+
+import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
+
+templ Button(input models.Button){
+<button id={input.Id} type={input.Type} class={`w-1/4 mt-3 p-3 rounded-md transition-colors duration-300` + " " +
+    input.ClassName }>
+    {input.Content}
+</button>
+}

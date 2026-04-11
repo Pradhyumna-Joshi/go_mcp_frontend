@@ -24,29 +24,35 @@ templ ToolsDisabled(conf []models.MCPServerConfig){
 
             <form hx-get="/gettoolconf" hx-target="#result" hx-swap="innerHTML"
                 class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                <div class="w-full flex flex-col gap-2">
-                    <label>Name</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
-                        name="name1" value={conf[0].Name} type="text" title="model" label="Model Name" required
-                        placeholder="your-mcp-server" readonly />
-                </div>
+                @Input(models.Input{
+                Label: "Name",
+                Name: "name1",
+                Value: conf[0].Name,
+                Type: "text",
+                Title: "Name of MCP Server",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
 
-                <div class="w-full flex flex-col gap-2">
-                    <label>Base URL</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
-                        name="base_url1" value={conf[0].BaseURL} type="text" title="model" label="Model Name" required
-                        placeholder="https://api.groq.com/openai/v1" readonly />
-                </div>
+                @Input(models.Input{
+                Label: "Base URL",
+                Name: "base-url1",
+                Value: conf[0].BaseURL,
+                Type: "text",
+                Title: "Base URL",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
 
-                <div class="w-full flex flex-col gap-2">
-                    <label>Transport</label>
-                    <input
-                        class="border cursor-not-allowed border-white/10  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="transport1" value={conf[0].Transport} type="text" title="model" label="Model Name"
-                        required placeholder="sse" readonly />
-                </div>
+                @Input(models.Input{
+                Label: "Transport",
+                Name: "transport1",
+                Value: conf[0].Transport,
+                Type: "text",
+                Title: "Transport Protocol",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
 
 
 
@@ -66,36 +72,43 @@ templ ToolsDisabled(conf []models.MCPServerConfig){
                         fames ac ante ipsum primis in faucibus</p>
 
                     <div class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Name</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
-                                name="name2" value={conf[1].Name} type="text" title="model" label="Model Name" required
-                                placeholder="your-mcp-server" readonly />
-                        </div>
+                        @Input(models.Input{
+                        Label: "Name",
+                        Name: "name2",
+                        Value: conf[1].Name,
+                        Type: "text",
+                        Title: "Name of MCP Server",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
 
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Base URL</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
-                                name="base_url2" value={conf[1].BaseURL} type="text" title="model" label="Model Name"
-                                required placeholder="https://api.groq.com/openai/v1" readonly />
-                        </div>
+                        @Input(models.Input{
+                        Label: "Base URL",
+                        Name: "base-url2",
+                        Value: conf[1].BaseURL,
+                        Type: "text",
+                        Title: "Base URL",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
 
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Transport</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="transport2" value={conf[1].Transport} type="text" title="model" label="Model Name"
-                                required placeholder="sse" readonly />
-                        </div>
+                        @Input(models.Input{
+                        Label: "Transport",
+                        Name: "transport2",
+                        Value: conf[1].Transport,
+                        Type: "text",
+                        Title: "Transport Protocol",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
 
+                        @Button(models.Button{
+                        Id: "btn-tool-edit",
+                        Type: "submit",
+                        Content: "Edit Settings",
+                        ClassName: "bg-red-500 hover:bg-red-500/80" ,
+                        })
 
-
-                        <button type="submit"
-                            class="w-1/4 mt-3 p-3 rounded-md bg-red-500 hover:bg-red-500/80 transition-colors duration-300">
-                            Edit Settings
-                        </button>
                     </div>
 
                 </div>

@@ -22,41 +22,57 @@ templ ConfigDisabled(conf []models.ModelConfig){
                 fames ac ante ipsum primis in faucibus</p>
             <form hx-get="/getmodelconf" hx-target="#result" hx-swap="innerHTML"
                 class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                <div class="w-full flex flex-col gap-2">
-                    <label>Name</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="name1" value={conf[0].Name} type="text" title="model" label="Model Name" required
-                        placeholder="groq-gpt-oss-120b" readonly />
-                </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>Provider</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="provider1" value={conf[0].Provider} type="text" title="model" label="Model Name" required
-                        placeholder="openai" readonly />
-                </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>Base URL</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                        name="base_url1" value={conf[0].BaseURL} type="text" title="model" label="Model Name" required
-                        placeholder="https://api.groq.com/openai/v1" readonly />
-                </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>API Key/ Token</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                        name="api_key1" value={conf[0].APIKey} type="password" title="model" required label="Model Name"
-                        readonly />
-                </div>
-                <div class="w-full flex flex-col gap-2">
-                    <label>Model</label>
-                    <input
-                        class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="model1" value={conf[0].Model} type="text" title="model" label="Model Name" required
-                        placeholder="openai/gpt-oss-120b" readonly />
-                </div>
+
+                @Input(models.Input{
+                Label: "Name",
+                Name: "name1",
+                Value: conf[0].Name,
+                Type: "text",
+                Title: "Name",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
+
+                @Input(models.Input{
+                Label: "Provider",
+                Name: "provider1",
+                Value: conf[0].Provider,
+                Type: "text",
+                Title: "Provider",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
+
+                @Input(models.Input{
+                Label: "Base URL",
+                Name: "base_url1",
+                Value: conf[0].BaseURL,
+                Type: "text",
+                Title: "Base URL",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
+
+                @Input(models.Input{
+                Label: "API Key/ Token",
+                Name: "api_key1",
+                Value: conf[0].APIKey,
+                Type: "password",
+                Title: "API Key/ Token",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
+
+                @Input(models.Input{
+                Label: "Model",
+                Name: "model1",
+                Value: conf[0].Model,
+                Type: "text",
+                Title: "Model",
+                ReadOnly: true,
+                ClassName: "cursor-not-allowed",
+                })
+
 
 
 
@@ -75,47 +91,65 @@ templ ConfigDisabled(conf []models.ModelConfig){
                         malesuada
                         fames ac ante ipsum primis in faucibus</p>
                     <div class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Name</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
-                                name="name2" value={conf[1].Name} type="text" title="model" label="Model Name" required
-                                placeholder="groq-gpt-oss-120b" readonly />
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Provider</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="provider2" value={conf[1].Model} type="text" title="model" label="Model Name"
-                                required placeholder="openai" readonly />
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Base URL</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                                name="base_url2" value={conf[1].BaseURL} type="text" title="model" label="Model Name"
-                                required placeholder="https://api.groq.com/openai/v1" readonly />
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>API Key/ Token</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300"
-                                name="api_key2" value={conf[1].APIKey} type="password" title="model" required
-                                label="Model Name" readonly />
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Model</label>
-                            <input
-                                class="border border-white/10 cursor-not-allowed  bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="model2" value={conf[1].Model} type="text" title="model" label="Model Name"
-                                required placeholder="openai/gpt-oss-120b" readonly />
-                        </div>
+
+                        @Input(models.Input{
+                        Label: "Name",
+                        Name: "name2",
+                        Value: conf[1].Name,
+                        Type: "text",
+                        Title: "Name",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
+
+                        @Input(models.Input{
+                        Label: "Provider",
+                        Name: "provider2",
+                        Value: conf[1].Provider,
+                        Type: "text",
+                        Title: "Provider",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
+
+                        @Input(models.Input{
+                        Label: "Base URL",
+                        Name: "base_url2",
+                        Value: conf[1].BaseURL,
+                        Type: "text",
+                        Title: "Base URL",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
+
+                        @Input(models.Input{
+                        Label: "API Key/ Token",
+                        Name: "api_key2",
+                        Value: conf[1].APIKey,
+                        Type: "password",
+                        Title: "API Key/ Token",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
+
+                        @Input(models.Input{
+                        Label: "Model",
+                        Name: "model2",
+                        Value: conf[1].Model,
+                        Type: "text",
+                        Title: "Model",
+                        ReadOnly: true,
+                        ClassName: "cursor-not-allowed",
+                        })
+
+                        @Button(models.Button{
+                        Id: "btn-model-edit",
+                        Type: "submit",
+                        Content: "Edit Settings",
+                        ClassName: "bg-red-500 hover:bg-red-500/80" ,
+                        })
 
 
-                        <button type="submit"
-                            class="w-1/4 mt-3 p-3 rounded-md bg-red-500 hover:bg-red-500/80 transition-colors duration-300 transition-all duration-300">
-                            Edit Settings
-                        </button>
 
 
 

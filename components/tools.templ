@@ -2,6 +2,10 @@ package components
 
 import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
 
+
+
+
+
 templ Tools(conf []models.MCPServerConfig){
 
 <div class="w-full h-screen flex flex-col overflow-hidden p-20">
@@ -24,32 +28,40 @@ templ Tools(conf []models.MCPServerConfig){
 
             <form hx-post="/settoolconf" hx-target="#result" hx-swap="innerHTML"
                 class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                <div class="w-full flex flex-col gap-2">
-                    <label>Name</label>
-                    <input autofocus
-                        class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
-                        name="name1" value={conf[0].Name} type="text" title="model" label="Model Name" required
-                        placeholder="your-mcp-server" />
-                </div>
 
-                <div class="w-full flex flex-col gap-2">
-                    <label>Base URL</label>
-                    <input
-                        class="border border-white/10 focus:border-blue-500 bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
-                        name="base_url1" value={conf[0].BaseURL} type="text" title="model" label="Model Name" required
-                        placeholder="https://api.groq.com/openai/v1" />
-                </div>
+                @Input(models.Input{
+                Label: "Name",
+                Name: "name1",
+                Value: conf[0].Name,
+                Type: "text",
+                Title: "Name of MCP Server",
+                Required: true,
+                PlaceHolder: "your-mcp-server",
+                ClassName: "focus:border-blue-500",
+                })
 
-                <div class="w-full flex flex-col gap-2">
-                    <label>Transport</label>
-                    <input autofocus
-                        class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                        name="transport1" value={conf[0].Transport} type="text" title="model" label="Model Name"
-                        required placeholder="sse" />
-                </div>
+                @Input(models.Input{
+                Label: "Base URL",
+                Name: "base_url1",
+                Value: conf[0].BaseURL,
+                Type: "text",
+                Title: "Base URL",
+                Required: true,
+                PlaceHolder: "https://api.groq.com/openai/v1",
+                ClassName: "focus:border-blue-500",
+                })
 
+                @Input(models.Input{
+                Label: "Transport",
+                Name: "transport1",
+                Value: conf[0].Transport,
+                Type: "text",
+                Title: "Transport Protocol",
+                Required: true,
+                PlaceHolder: "sse",
 
-
+                ClassName: "focus:border-blue-500",
+                })
 
 
 
@@ -66,35 +78,49 @@ templ Tools(conf []models.MCPServerConfig){
                         fames ac ante ipsum primis in faucibus</p>
 
                     <div class="w-full flex flex-col gap-4 items-start justify-center mt-4 ">
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Name</label>
-                            <input autofocus
-                                class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none"
-                                name="name2" value={conf[1].Name} type="text" title="model" label="Model Name" required
-                                placeholder="your-mcp-server" />
-                        </div>
 
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Base URL</label>
-                            <input
-                                class="border border-white/10 focus:border-blue-500 bg-slate-900 p-3 w-1/2 transition-all duration-300 font-sans rounded-md outline-none"
-                                name="base_url2" value={conf[1].BaseURL} type="text" title="model" label="Model Name"
-                                required placeholder="https://api.groq.com/openai/v1" />
-                        </div>
+                        @Input(models.Input{
+                        Label: "Name",
+                        Name: "name2",
+                        Value: conf[1].Name,
+                        Type: "text",
+                        Title: "Name of MCP Server",
+                        Required: true,
+                        PlaceHolder: "your-mcp-server",
 
-                        <div class="w-full flex flex-col gap-2">
-                            <label>Transport</label>
-                            <input autofocus
-                                class="border border-white/10 focus:border-blue-500 bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300"
-                                name="transport2" value={conf[1].Transport} type="text" title="model" label="Model Name"
-                                required placeholder="sse" />
-                        </div>
+                        ClassName: "focus:border-blue-500",
+                        })
 
+                        @Input(models.Input{
+                        Label: "Base URL",
+                        Name: "base_url2",
+                        Value: conf[1].BaseURL,
+                        Type: "text",
+                        Title: "Base URL",
+                        Required: true,
+                        PlaceHolder: "https://api.groq.com/openai/v1",
 
-                        <button type="submit"
-                            class="w-1/4 mt-3 p-3 rounded-md bg-blue-700 hover:bg-blue-600 transition-colors duration-300">
-                            Save Configuration
-                        </button>
+                        ClassName: "focus:border-blue-500",
+                        })
+
+                        @Input(models.Input{
+                        Label: "Transport",
+                        Name: "transport2",
+                        Value: conf[1].Transport,
+                        Type: "text",
+                        Title: "Transport Protocol",
+                        Required: true,
+                        PlaceHolder: "sse",
+                        ClassName: "focus:border-blue-500",
+                        })
+
+                        @Button(models.Button{
+                        Id: "btn-tool-save",
+                        Type: "submit",
+                        Content: "Save Configuration",
+                        ClassName: "bg-blue-600 hover:bg-blue-600/80" ,
+                        })
+
 
 
                     </div>

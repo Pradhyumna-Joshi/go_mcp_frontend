@@ -163,7 +163,7 @@ templ ChatHome(user string,greeting string,showIntro bool){
 <div x-data="chatComponent()" x-init="init()" hx-on:htmx:after-swap="Alpine.initTree($el)" class=" flex flex-col h-screen w-full p-20 justify-center
     transition duration-500">
 
-    <div x-show="showIntroText" class=" m-4">
+    <div x-show="showIntroText">
         <h1 class="w-fit text-2xl font-light">Hi, {user}</h1>
         <h1
             class="w-fit h-[50px] text-4xl    bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
@@ -200,7 +200,7 @@ templ ChatHome(user string,greeting string,showIntro bool){
             <input type="file" id="file-upload" class="hidden" />
             <div @click="if (!isLoading) document.getElementById('file-upload').click()"
                 class="absolute flex justify-center items-center bottom-1 m-4 left-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
-                <i class="fa-solid fa-plus"></i>
+                <i title="Upload File" class="fa-solid fa-plus"></i>
             </div>
         </div>
 
@@ -212,16 +212,18 @@ templ ChatHome(user string,greeting string,showIntro bool){
                 $event.preventDefault()
                 sendMessage()
         }" autofocus
-            class="w-full min-h-[120px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-base font-sans outline-none resize-none border border-white/10 shadow-2xl focus:border-blue-400/50  transition-all duration-300"
+            class="w-full min-h-[120px] max-h-[200px] p-5  rounded-2xl bg-slate-900 text-white text-base font-sans outline-none resize-none border border-white/10 shadow-2xl focus:border-blue-400/50  transition-all duration-800"
             name="input" id="input" placeholder="Ask Nexus"></textarea>
 
 
 
         <div @click="sendMessage()"
             class="absolute flex justify-center items-center bottom-1 m-4 right-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
-            <i x-show="isDone" x-transition class="fa-solid fa-angle-up"></i>
-            <i x-show="!isDone" x-transition class="fa-solid fa-stop fa-sm"></i>
+            <i title="Send" x-show="isDone" x-transition class="fa-solid fa-angle-up"></i>
+            <i title="Stop" x-show="!isDone" x-transition class="fa-solid fa-stop fa-sm"></i>
         </div>
+
+
         <div class="absolute w-full flex items-center justify-end ">
             <h1 class="m-1 text-sm select-none text-white/30">*Model can make mistakes</h1>
         </div>

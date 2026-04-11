@@ -31,137 +31,144 @@ func ConfigDisabled(conf []models.ModelConfig) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-screen flex flex-col overflow-hidden p-20\"><div class=\"flex flex-row gap-2 pb-2 items-center w-full rounded-md shadow-md transition duration-300 cursor-pointer\"><h3 class=\"text-3xl select-none\">Configuration</h3></div><div class=\"flex-1 overflow-y-auto scroll-smooth\"><div class=\"mt-8\"><h1 class=\"text-xl font-bold\">Planner LLM</h1><p class=\"mt-2 text-sm italic\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus</p><form hx-get=\"/getmodelconf\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"w-full flex flex-col gap-4 items-start justify-center mt-4\"><div class=\"w-full flex flex-col gap-2\"><label>Name</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300\" name=\"name1\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-screen flex flex-col overflow-hidden p-20\"><div class=\"flex flex-row gap-2 pb-2 items-center w-full rounded-md shadow-md transition duration-300 cursor-pointer\"><h3 class=\"text-3xl select-none\">Configuration</h3></div><div class=\"flex-1 overflow-y-auto scroll-smooth\"><div class=\"mt-8\"><h1 class=\"text-xl font-bold\">Planner LLM</h1><p class=\"mt-2 text-sm italic\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus</p><form hx-get=\"/getmodelconf\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"w-full flex flex-col gap-4 items-start justify-center mt-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(conf[0].Name)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 29, Col: 56}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"groq-gpt-oss-120b\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Provider</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300\" name=\"provider1\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(conf[0].Provider)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 36, Col: 64}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Name",
+			Name:      "name1",
+			Value:     conf[0].Name,
+			Type:      "text",
+			Title:     "Name",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"openai\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Base URL</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300\" name=\"base_url1\" value=\"")
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Provider",
+			Name:      "provider1",
+			Value:     conf[0].Provider,
+			Type:      "text",
+			Title:     "Provider",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(conf[0].BaseURL)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 43, Col: 63}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"https://api.groq.com/openai/v1\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>API Key/ Token</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300\" name=\"api_key1\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(conf[0].APIKey)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 50, Col: 61}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Base URL",
+			Name:      "base_url1",
+			Value:     conf[0].BaseURL,
+			Type:      "text",
+			Title:     "Base URL",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" type=\"password\" title=\"model\" required label=\"Model Name\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Model</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300\" name=\"model1\" value=\"")
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "API Key/ Token",
+			Name:      "api_key1",
+			Value:     conf[0].APIKey,
+			Type:      "password",
+			Title:     "API Key/ Token",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var6 string
-		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(conf[0].Model)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 57, Col: 58}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"openai/gpt-oss-120b\" readonly></div><div class=\"mt-8\"><h1 class=\"text-xl font-bold\">Executor LLM</h1><p class=\"mt-2 text-sm italic\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus</p><div class=\"w-full flex flex-col gap-4 items-start justify-center mt-4\"><div class=\"w-full flex flex-col gap-2\"><label>Name</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none\" name=\"name2\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var7 string
-		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(conf[1].Name)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 82, Col: 64}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Model",
+			Name:      "model1",
+			Value:     conf[0].Model,
+			Type:      "text",
+			Title:     "Model",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"groq-gpt-oss-120b\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Provider</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300\" name=\"provider2\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"mt-8\"><h1 class=\"text-xl font-bold\">Executor LLM</h1><p class=\"mt-2 text-sm italic\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus</p><div class=\"w-full flex flex-col gap-4 items-start justify-center mt-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(conf[1].Model)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 89, Col: 69}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"openai\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Base URL</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300\" name=\"base_url2\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var9 string
-		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(conf[1].BaseURL)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 96, Col: 71}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Name",
+			Name:      "name2",
+			Value:     conf[1].Name,
+			Type:      "text",
+			Title:     "Name",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"https://api.groq.com/openai/v1\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>API Key/ Token</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 p-3 w-1/2 font-sans rounded-md outline-none transition-all duration-300\" name=\"api_key2\" value=\"")
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Provider",
+			Name:      "provider2",
+			Value:     conf[1].Provider,
+			Type:      "text",
+			Title:     "Provider",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(conf[1].APIKey)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 103, Col: 69}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "\" type=\"password\" title=\"model\" required label=\"Model Name\" readonly></div><div class=\"w-full flex flex-col gap-2\"><label>Model</label> <input class=\"border border-white/10 cursor-not-allowed bg-slate-900 font-sans p-3 w-1/2 rounded-md outline-none transition-all duration-300\" name=\"model2\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(conf[1].Model)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/config_disabled.templ`, Line: 110, Col: 66}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Base URL",
+			Name:      "base_url2",
+			Value:     conf[1].BaseURL,
+			Type:      "text",
+			Title:     "Base URL",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" type=\"text\" title=\"model\" label=\"Model Name\" required placeholder=\"openai/gpt-oss-120b\" readonly></div><button type=\"submit\" class=\"w-1/4 mt-3 p-3 rounded-md bg-red-500 hover:bg-red-500/80 transition-colors duration-300 transition-all duration-300\">Edit Settings</button></div></div></form></div></div></div>")
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "API Key/ Token",
+			Name:      "api_key2",
+			Value:     conf[1].APIKey,
+			Type:      "password",
+			Title:     "API Key/ Token",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = Input(models.Input{
+			Label:     "Model",
+			Name:      "model2",
+			Value:     conf[1].Model,
+			Type:      "text",
+			Title:     "Model",
+			ReadOnly:  true,
+			ClassName: "cursor-not-allowed",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = Button(models.Button{
+			Id:        "btn-model-edit",
+			Type:      "submit",
+			Content:   "Edit Settings",
+			ClassName: "bg-red-500 hover:bg-red-500/80",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div></form></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

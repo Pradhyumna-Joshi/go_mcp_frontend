@@ -8,6 +8,8 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
+
 func Base() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -29,7 +31,55 @@ func Base() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Nexus</title><link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css\"><script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script><script src=\"https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.js\" integrity=\"sha384-ezjq8118wdwdRMj+nX4bevEi+cDLTbhLAeFF688VK8tPDGeLUe0WoY2MZtSla72F\" crossorigin=\"anonymous\"></script><script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script><script src=\"https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js\"></script><script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js\"></script><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css\"><link rel=\"stylesheet\" href=\"/static/css/output.css\"></head><body class=\"bg-slate-950\"><div class=\"flex-1 h-screen flex flex-row text-gray-300 font-['Poppins']\"><div class=\"h-screen w-1/4\"><div class=\"flex flex-col h-screen w-full p-3 justify-between\"><div><h1 class=\"w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 tracking-lighter text-transparent bg-clip-text select-none\">NEXUS</h1><div class=\"mt-10 text-sm text-gray-300 font-light\"><div hx-get=\"/newChat\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer\"><i class=\"fa-solid fa-square-plus fa-md\"></i><h3 class=\"select-none\">New Chat</h3></div><div hx-get=\"/config\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><i class=\"fa-brands fa-buffer\"></i><h3 class=\"select-none\">Models</h3></div><div hx-get=\"/tools\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><i class=\"fa-solid fa-screwdriver-wrench fa-sm\"></i><h3 class=\"select-none\">Tools</h3></div></div></div><div class=\"text-gray-300 text-sm\"><div hx-get=\"/about\" hx-target=\"#result\" hx-swap=\"innerHTML\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><i class=\"fa-solid fa-circle-info fa-sm\"></i><h2 class=\"select-none\">About</h2></div><div class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 cursor-pointer\"><i class=\"fa-solid fa-arrow-right-from-bracket fa-md\"></i><h2 class=\"select-none\">Log Out</h2></div></div></div></div><div class=\"bg-slate-900 h-screen w-[2px]\"></div><div id=\"result\" class=\"w-3/4\"><div class=\"p-20\"><h1 class=\"text-3xl mb-2\">Welcome to NEXUS</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam quam ligula, viverra et luctus sed, accumsan non erat. Curabitur convallis semper mattis. Vivamus maximus quam non semper feugiat. Proin non varius ex. Mauris finibus ligula a leo laoreet tristique. Ut pretium commodo interdum. Nam nibh leo, posuere ut mi vel, iaculis ultrices sapien. Pellentesque id iaculis orci. Phasellus nisl mauris, accumsan nec turpis a, aliquam imperdiet ligula. Fusce molestie dolor nisl, quis pellentesque dui malesuada nec. Maecenas cursus rhoncus ipsum, a cursus eros mattis in. Maecenas mattis efficitur laoreet. Fusce interdum nec nulla ac tempor. Donec placerat nisl mi, sed venenatis nunc faucibus id. Praesent aliquam dolor mauris, vel faucibus sem scelerisque sed. Aenean dui orci, egestas quis est eget, iaculis tempor felis. Curabitur et ex ut velit pellentesque scelerisque in id lacus. Mauris laoreet est vel nisl eleifend, vel sodales odio hendrerit.</p></div></div></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Nexus</title><link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css\"><script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script><script src=\"https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.js\" integrity=\"sha384-ezjq8118wdwdRMj+nX4bevEi+cDLTbhLAeFF688VK8tPDGeLUe0WoY2MZtSla72F\" crossorigin=\"anonymous\"></script><script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script><script src=\"https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js\"></script><script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js\"></script><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css\"><link rel=\"stylesheet\" href=\"/static/css/output.css\"></head><body class=\"bg-slate-950\"><div class=\"flex-1 h-screen flex flex-row text-gray-300 font-['Poppins']\"><div class=\"h-screen w-1/4\"><div class=\"flex flex-col h-screen w-full p-3 justify-between\"><div><h1 class=\"w-fit text-4xl p-2 font-large font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 tracking-lighter text-transparent bg-clip-text select-none\">NEXUS</h1><div class=\"mt-10 text-sm text-gray-300 font-light\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = NavItem(models.NavItem{
+			Title:     "New Chat",
+			GetURL:    "/newChat",
+			Target:    "#result",
+			Swap:      "innerHTML",
+			IconClass: "fa-solid fa-square-plus fa-lg",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = NavItem(models.NavItem{
+			Title:     "Models",
+			GetURL:    "/config",
+			Target:    "#result",
+			Swap:      "innerHTML",
+			IconClass: "fa-brands fa-buffer fa-lg",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = NavItem(models.NavItem{
+			Title:     "Tools",
+			GetURL:    "/tools",
+			Target:    "#result",
+			Swap:      "innerHTML",
+			IconClass: "fa-solid fa-screwdriver-wrench fa-lg",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div><div class=\"text-gray-300 text-sm\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = NavItem(models.NavItem{
+			Title:     "About",
+			GetURL:    "/about",
+			Target:    "#result",
+			Swap:      "innerHTML",
+			IconClass: "fa-solid fa-circle-info fa-lg",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<!--\n                    <div\n                        class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 cursor-pointer\">\n                        <i class=\"fa-solid fa-arrow-right-from-bracket fa-md\"></i>\n                        <h2 class=\"select-none\">Log Out</h2>\n                    </div>\n--></div></div></div><div class=\"bg-slate-900 h-screen w-[2px]\"></div><div id=\"result\" class=\"w-3/4\"><div class=\"p-20\"><h1 class=\"text-3xl mb-2\">Welcome to NEXUS</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum sapien id scelerisque ullamcorper. Aliquam cursus rhoncus nibh, et iaculis leo blandit luctus. Mauris et pellentesque enim, vel finibus augue. Duis aliquam luctus rhoncus. Curabitur sed ligula in ante iaculis hendrerit vel eu ipsum. Maecenas interdum est ut placerat ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam quam ligula, viverra et luctus sed, accumsan non erat. Curabitur convallis semper mattis. Vivamus maximus quam non semper feugiat. Proin non varius ex. Mauris finibus ligula a leo laoreet tristique. Ut pretium commodo interdum. Nam nibh leo, posuere ut mi vel, iaculis ultrices sapien. Pellentesque id iaculis orci. Phasellus nisl mauris, accumsan nec turpis a, aliquam imperdiet ligula. Fusce molestie dolor nisl, quis pellentesque dui malesuada nec. Maecenas cursus rhoncus ipsum, a cursus eros mattis in. Maecenas mattis efficitur laoreet. Fusce interdum nec nulla ac tempor. Donec placerat nisl mi, sed venenatis nunc faucibus id. Praesent aliquam dolor mauris, vel faucibus sem scelerisque sed. Aenean dui orci, egestas quis est eget, iaculis tempor felis. Curabitur et ex ut velit pellentesque scelerisque in id lacus. Mauris laoreet est vel nisl eleifend, vel sodales odio hendrerit.</p></div></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
