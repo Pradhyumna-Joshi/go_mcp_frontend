@@ -31,7 +31,7 @@ templ ChatHome(user string,greeting string,showIntro bool){
                 const container = document.getElementById('message-container');
                 if (container) container.innerHTML = '';
 
-                this.socket = new WebSocket('ws://localhost:8000/ws');
+                this.socket = new WebSocket('ws://localhost:9999/agent/chat');
 
                 this.socket.onmessage = (event) => {
                     if (!this.isLoading) {
@@ -68,7 +68,16 @@ templ ChatHome(user string,greeting string,showIntro bool){
                     const newMessage = document.createElement('div');
                     newMessage.className = 'mt-4 text-gray-300';
 
-                    this.currentBubble = document.createElement('p');
+                    this.currentBubble = document.createElement('div');
+                    this.currentBubble.className = ` 
+                    prose prose-invert max-w-none
+                    prose-p:text-gray-300
+                    prose-headings:text-white
+                    prose-strong:text-white
+                    prose-li:text-gray-300
+                    leading-relaxed
+                    `
+
 
                     newMessage.appendChild(this.currentBubble);
                     wrapper.appendChild(logo);
@@ -76,12 +85,51 @@ templ ChatHome(user string,greeting string,showIntro bool){
                     container.appendChild(wrapper);
                 }
 
+                if (!this.buffer) this.buffer = ""
+
                 if (data === '[DONE]') {
+
+                    const bubble = this.currentBubble
+                    setTimeout(() => {
+
+                        bubble.querySelectorAll('pre code').forEach((block) => {
+                            hljs.highlightElement(block)
+                            const pre = block.parentElement;
+
+                            if (pre.querySelector('.copy-btn')) return;
+
+                            const button = document.createElement('button');
+                            button.innerText = 'Copy';
+
+                            button.className = `
+                            copy-btn
+                            absolute top-2 right-2
+                            text-xs px-2 py-1
+                            bg-blue-500 hover:bg-blue-500/80
+                            text-white rounded
+                            `;
+
+                            button.onclick = () => {
+                                navigator.clipboard.writeText(block.innerText);
+                                button.innerText = "Copied!";
+                                setTimeout(() => button.innerText = "Copy", 1500);
+                            };
+
+                            pre.style.position = 'relative';
+                            pre.appendChild(button);
+                        })
+                    }, 0)
                     this.isDone = true;
                     this.currentBubble = null;
+                    this.buffer = ""
+                    return
                 } else {
-                    this.currentBubble.textContent += data;
+
+                    this.buffer += data
+                    this.currentBubble.innerHTML = (marked.parse(this.buffer));
                 }
+
+
             },
 
             sendMessage() {
@@ -124,9 +172,9 @@ templ ChatHome(user string,greeting string,showIntro bool){
     </div>
 
 
-    <div x-if="showChatWindow" id="chat-window" x-ref="chat" :class="showChatWindow?'flex-1':h-0 overflow-hidden"
-        class=" overflow-y-auto flex flex-col  w-full mb-4 scroll-smooth font-sans" style="overflow-anchor:none"
-        @htmx:after-settle="$el.scrollTop = $el.scrollHeight">
+    <div x-if="showChatWindow" id="chat-window" x-ref="chat" :class="showChatWindow?'flex-1':'h-0 overflow-hidden'"
+        class="overflow-x-hidden overflow-y-auto no-scrollbar flex flex-col  w-full mb-4 scroll-smooth font-sans"
+        style="overflow-anchor:none" @htmx:after-settle="$el.scrollTop = $el.scrollHeight">
 
         <div id="message-container" class="w-full flex flex-col"></div>
 
@@ -168,13 +216,17 @@ templ ChatHome(user string,greeting string,showIntro bool){
             name="input" id="input" placeholder="Ask Nexus"></textarea>
 
 
+
         <div @click="sendMessage()"
             class="absolute flex justify-center items-center bottom-1 m-4 right-0 bg-slate-800 hover:bg-slate-950 w-[30px] h-[30px] rounded-full transition duration-300">
             <i x-show="isDone" x-transition class="fa-solid fa-angle-up"></i>
             <i x-show="!isDone" x-transition class="fa-solid fa-stop fa-sm"></i>
         </div>
-
+        <div class="absolute w-full flex items-center justify-end ">
+            <h1 class="m-1 text-sm select-none text-white/30">*Model can make mistakes</h1>
+        </div>
     </div>
+
 </div>
 
 }
