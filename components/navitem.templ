@@ -4,8 +4,9 @@ import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
 
 templ NavItem(input models.NavItem){
 <div hx-get={input.GetURL} hx-target={input.Target} hx-swap={input.Swap }
-    class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md  hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer">
-    <i class={input.IconClass}></i>
-    <h3 class="select-none text-base">{input.Title}</h3>
+    class="flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md   hover:bg-slate-900  transition-all duration-300 ease-in-out cursor-pointer">
+    <i class={input.IconClass} style="color: rgb(209, 213, 219);"></i>
+    <h3 class="select-none text-gray-400 hover:text-gray-300 transition-all duration-300  text-[15px]">{input.Title}
+    </h3>
 </div>
 }

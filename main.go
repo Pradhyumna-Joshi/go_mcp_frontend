@@ -69,8 +69,18 @@ func main() {
 	})
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		components.Base().Render(r.Context(), w)
+		//components.Home().Render(r.Context(), w)
+		components.Login().Render(r.Context(), w)
 	})
+
+	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		username := r.FormValue("username")
+		password := r.FormValue("password")
+
+		fmt.Println(username, password)
+		components.Home().Render(r.Context(), w)
+	})
+
 	mux.HandleFunc("/newChat", func(w http.ResponseWriter, r *http.Request) {
 		components.ChatHome("Pradhyumna", titles[rand.Intn(len(titles))], true).Render(r.Context(), w)
 

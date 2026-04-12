@@ -70,7 +70,7 @@ func NavItem(input models.NavItem) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition duration-300 ease-in-out cursor-pointer\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"flex flex-row gap-2 items-center w-full p-2 mb-1 rounded-md shadow-md hover:bg-slate-900 transition-all duration-300 ease-in-out cursor-pointer\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -92,14 +92,14 @@ func NavItem(input models.NavItem) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\"></i><h3 class=\"select-none text-base\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" style=\"color: rgb(209, 213, 219);\"></i><h3 class=\"select-none text-gray-400 hover:text-gray-300 transition-all duration-300 text-[15px]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(input.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/navitem.templ`, Line: 9, Col: 50}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/navitem.templ`, Line: 9, Col: 115}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {

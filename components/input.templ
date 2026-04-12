@@ -4,6 +4,7 @@ import "github.com/Pradhyumna-Joshi/go_mcp_frontend/models"
 
 templ Input(input models.Input){
 <div class="w-full flex flex-col gap-2">
+
     <label>{input.Label}</label>
     <input autocomplete="off" autofocus class={`border border-white/10 bg-slate-900 font-sans p-3 w-1/2 rounded-md
         outline-none transition-all duration-300` +" "+ input.ClassName}
