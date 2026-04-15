@@ -52,7 +52,6 @@ templ ChatHome(user string,greeting string,showIntro bool){
             },
 
             handleStream(data) {
-                this.isDone = false;
                 this.isLoading = false;
 
                 if (!this.currentBubble) {
@@ -135,9 +134,11 @@ templ ChatHome(user string,greeting string,showIntro bool){
             sendMessage() {
                 if (this.message.trim() === '' || this.isLoading) return;
 
+
+                this.isDone = false;
                 this.showIntroText = false;
                 this.showChatWindow = true;
-
+                this.currentBubble = null
                 document.getElementById('message-container').insertAdjacentHTML(
                     'beforeend',
                     `
@@ -160,6 +161,7 @@ templ ChatHome(user string,greeting string,showIntro bool){
         };
     }
 </script>
+
 <div x-data="chatComponent()" x-init="init()" hx-on:htmx:after-swap="Alpine.initTree($el)" class=" flex flex-col h-screen w-full p-20 justify-center
     transition duration-500">
 

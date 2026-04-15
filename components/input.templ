@@ -7,13 +7,7 @@ templ Input(input models.Input){
 
     <label>{input.Label}</label>
     <input autocomplete="off" autofocus class={`border border-white/10 bg-slate-900 font-sans p-3 w-1/2 rounded-md
-        outline-none transition-all duration-300` +" "+ input.ClassName}
-        name={input.Name}
-        value={input.Value}
-        type={input.Type}
-        title={input.Title} 
-        required={input.Required}
-        placeholder={input.PlaceHolder}
-        readonly?={input.ReadOnly} />
+        outline-none transition-all duration-300` +" "+ input.ClassName}  name={input.Name} value={input.Value} type={input.Type} title={input.Title}
+        required={input.Required} placeholder={input.PlaceHolder} readonly?={input.ReadOnly} />
 </div>
 }

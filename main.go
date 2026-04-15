@@ -41,7 +41,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Cache-Control", "no-store")
+		w.Header().Set("Cache-Control", "no-cache")
 		http.StripPrefix("/static/", http.FileServer(http.Dir("static"))).ServeHTTP(w, r)
 	})
 
@@ -104,6 +104,7 @@ func main() {
 	})
 
 	mux.HandleFunc("POST /settoolconf", func(w http.ResponseWriter, r *http.Request) {
+
 		serverConf[0].Name = r.FormValue("name1")
 		serverConf[0].BaseURL = r.FormValue("base_url1")
 		serverConf[0].Transport = r.FormValue("transport1")
@@ -131,10 +132,8 @@ func main() {
 	})
 
 	mux.HandleFunc("/chatMessage", func(w http.ResponseWriter, r *http.Request) {
-		input := r.FormValue("input")
 
 		time.Sleep(2 * time.Second)
-		components.AIMsgBubble(input).Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
